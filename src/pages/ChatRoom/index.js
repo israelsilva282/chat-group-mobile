@@ -1,13 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function ChatRoom() {
     const navigation = useNavigation();
 
     return (
-        <View style={styles.container}>
-            <Text>Tela ChatRoom</Text>
-            <Button title='Login' onPress={() => navigation.navigate('SignIn')} /></View>
+        <SafeAreaView style={styles.container}>
+            <Button title='Login' onPress={() => navigation.navigate('SignIn')} />
+
+        </SafeAreaView>
     );
 }
 
@@ -15,7 +17,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
+
 });

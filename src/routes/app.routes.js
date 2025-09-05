@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Header from "../components/Header";
 import ChatRoom from "../pages/ChatRoom";
 import Messages from "../pages/Messages";
 import Search from "../pages/Search";
@@ -12,9 +13,15 @@ export default function AppRoutes() {
             <Stack.Screen name="SignIn" component={SignIn} options={{
                 title: 'Acesse agora',
             }} />
-            <Stack.Screen name="ChatRoom" component={ChatRoom} options={{
-                headerShown: false,
-            }} />
+            <Stack.Screen
+                name="ChatRoom"
+                component={ChatRoom}
+                options={{
+                    title: 'Grupos',
+                    header: (props) => <Header {...props} />,
+                }}
+            />
+
             <Stack.Screen name="Search" component={Search} />
             <Stack.Screen name="Messages" component={Messages} />
         </Stack.Navigator>
