@@ -1,10 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 
 export default function ChatRoom() {
+    const navigation = useNavigation();
+
     return (
         <View style={styles.container}>
             <Text>Tela ChatRoom</Text>
-        </View>
+            <Button title='Login' onPress={() => navigation.navigate('SignIn')} /></View>
     );
 }
 
