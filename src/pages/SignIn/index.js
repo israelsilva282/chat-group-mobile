@@ -6,18 +6,23 @@ export default function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const [type, setType] = useState(false); // false = login, true = cadastro
+
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.logo}>ChatGroup</Text>
             <Text style={{ marginBottom: 20 }}>Ajude, colabore, faça networking</Text>
 
-            <TextInput
-                style={styles.input}
-                value={name}
-                onChangeText={setName}
-                placeholder='Qual seu nome?'
-                placeholderTextColor={'#99999b'}
-            />
+
+            {type && (
+                <TextInput
+                    style={styles.input}
+                    value={name}
+                    onChangeText={setName}
+                    placeholder='Qual seu nome?'
+                    placeholderTextColor={'#99999b'}
+                />
+            )}
             <TextInput
                 style={styles.input}
                 value={email}
@@ -33,11 +38,12 @@ export default function SignIn() {
                 placeholderTextColor={'#99999b'}
             />
 
-            <TouchableOpacity style={styles.buttonLogin}>
-                <Text style={styles.buttonText}>Acessar</Text>
+            <TouchableOpacity style={[styles.buttonLogin, { backgroundColor: type ? '#f53745' : '#57db86' }]}>
+                <Text style={styles.buttonText}>{type ? 'Cadastrar' : 'Acessar'}</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
-                <Text>Criar uma nova conta</Text>
+
+            <TouchableOpacity onPress={() => setType(!type)}>
+                <Text>{type ? 'Já possuo uma conta' : 'Criar uma nova conta'}</Text>
             </TouchableOpacity>
         </SafeAreaView>
     );
@@ -67,7 +73,6 @@ const styles = StyleSheet.create({
     },
     buttonLogin: {
         width: '90%',
-        backgroundColor: '#121212',
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',
