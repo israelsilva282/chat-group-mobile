@@ -5,7 +5,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { auth } from "../../services/firebaseConfig";
 
 function CustomHeader({ navigation, options }) {
-
     function handleSignOut() {
         const user = auth.currentUser;
 
@@ -34,11 +33,11 @@ function CustomHeader({ navigation, options }) {
                 <TouchableOpacity onPress={() => alert("Pesquisar...")}>
                     <Feather name="search" size={22} color="#fff" style={styles.icon} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={handleSignOut}>
+                {auth.currentUser && <TouchableOpacity TouchableOpacity onPress={handleSignOut}>
                     <Feather name="log-out" size={22} color="red" style={styles.icon} />
-                </TouchableOpacity>
+                </TouchableOpacity>}
             </View>
-        </SafeAreaView>
+        </SafeAreaView >
     );
 }
 

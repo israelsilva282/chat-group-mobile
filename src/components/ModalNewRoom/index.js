@@ -2,7 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import {
     Animated,
     Easing,
+    KeyboardAvoidingView,
     Modal,
+    Platform,
     StyleSheet,
     Text,
     TextInput,
@@ -60,25 +62,33 @@ export default function ModalNewRoom({ setVisible, visible }) {
                     <View style={styles.modal} />
                 </TouchableWithoutFeedback>
 
-                <Animated.View
-                    style={[
-                        styles.modalContent,
-                        { transform: [{ translateY: slideAnim }] },
-                    ]}
+                <KeyboardAvoidingView
+                    behavior={Platform.OS === 'ios' ? 'padding' : undefined}
                 >
-                    <Text style={styles.title}>Criar um novo grupo?</Text>
+                    <Animated.View
+                        style={[
+                            styles.modalContent,
+                            { transform: [{ translateY: slideAnim }] },
+                        ]}
+                    >
+                        <Text style={styles.title}>Criar um novo grupo?</Text>
 
-                    <TextInput
-                        value={roomName}
-                        onChangeText={setRoomName}
-                        placeholder="Nome da sala"
-                        style={styles.input}
-                    />
+                        <TextInput
+                            value={roomName}
+                            onChangeText={setRoomName}
+                            placeholder="Nome da sala"
+                            style={styles.input}
+                        />
 
-                    <TouchableOpacity style={styles.buttonCreate}>
-                        <Text style={styles.buttonText}>Criar sala</Text>
-                    </TouchableOpacity>
-                </Animated.View>
+                        <TouchableOpacity style={styles.buttonCreate}>
+                            <Text style={styles.buttonText}>Criar sala</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.backButton} onPress={setVisible}>
+                            <Text>Voltar</Text>
+                        </TouchableOpacity>
+                    </Animated.View>
+                </KeyboardAvoidingView>
             </Animated.View>
         </Modal>
     );
@@ -127,4 +137,8 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
     },
+    backButton: {
+        marginTop: 10,
+        alignItems: 'center',
+    }
 });
