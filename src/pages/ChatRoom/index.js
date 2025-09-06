@@ -1,15 +1,20 @@
 import { useNavigation } from '@react-navigation/native';
-import { Button, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import FabButton from '../../components/FabButton';
+import ModalNewRoom from '../../components/ModalNewRoom';
 
 export default function ChatRoom() {
     const navigation = useNavigation();
 
-    return (
-        <SafeAreaView style={styles.container}>
-            <Button title='Login' onPress={() => navigation.navigate('SignIn')} />
+    const [modalVisible, setModalVisible] = useState(false);
 
-        </SafeAreaView>
+    return (
+        <View style={styles.container}>
+            <FabButton setVisible={() => setModalVisible(true)} />
+
+            <ModalNewRoom setVisible={() => setModalVisible(false)} visible={modalVisible} />
+        </View>
     );
 }
 
